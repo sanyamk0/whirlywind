@@ -21,6 +21,7 @@ const images = [
   { name: "Wind", src: wind },
 ];
 const App = () => {
+  const [loading, setLoading] = useState(false);
   const [data, setdata] = useState({});
   const [error, setError] = useState(null);
   const [location, setlocation] = useState("");
@@ -29,18 +30,29 @@ const App = () => {
 
   const searchlocation = (event) => {
     if (event.key === "Enter") {
+      setLoading(true);
       setError(null);
       axios
         .get(url)
         .then((response) => {
           setdata(response.data);
+          setLoading(false);
         })
         .catch((error) => {
           setError(error.message);
+          setLoading(false);
         });
       setlocation("");
     }
   };
+
+  if (loading) {
+    return (
+      <p className="capitalize text-xl font-semibold text-center">
+        Loading weather data...
+      </p>
+    );
+  }
 
   if (error) {
     return (
