@@ -22,18 +22,34 @@ const images = [
 ];
 const App = () => {
   const [data, setdata] = useState({});
+  const [error, setError] = useState(null);
   const [location, setlocation] = useState("");
   const API_KEY = "4df84caa1d7698d7c2611247356c44f9";
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}`;
 
   const searchlocation = (event) => {
     if (event.key === "Enter") {
-      axios.get(url).then((response) => {
-        setdata(response.data);
-      });
+      setError(null);
+      axios
+        .get(url)
+        .then((response) => {
+          setdata(response.data);
+        })
+        .catch((error) => {
+          setError(error.message);
+        });
       setlocation("");
     }
   };
+
+  if (error) {
+    return (
+      <p className="capitalize text-xl font-semibold text-center">
+        {error}!! Please Refresh
+      </p>
+    );
+  }
+
   let matchedImage = null;
   if (data.weather) {
     matchedImage = images.find((image) => image.name === data.weather[0].main);
