@@ -68,7 +68,7 @@ const App = () => {
   }
   return (
     <div className="relative">
-      <div className="absolute top-32 left-1/2 z-10 mt-5 flex w-screen max-w-max -translate-x-1/2 px-4">
+      <div className="absolute top-10 left-1/2 z-10 mt-5 flex w-screen max-w-max -translate-x-1/2 px-4">
         <div className="w-screen text-white bg-gradient-to-r from-[#7f00ff] to-[#e100ff]  max-w-md flex-auto overflow-hidden rounded-3xl text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
           <div className="p-4">
             <div className="relative mt-2 rounded-md shadow-sm">
@@ -107,7 +107,7 @@ const App = () => {
             )}
             {data.name ? <p>{data.name}</p> : <p>City Name</p>}
           </div>
-          <div className="grid grid-cols-2">
+          <div className="md:grid md:grid-cols-2 flex flex-col">
             <div className="grid grid-cols-2">
               <img src={humidity} alt="Humidty" className="ml-14 mt-8 h-8" />
               <div className="text-left p-6 pl-0">
